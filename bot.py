@@ -27,22 +27,10 @@ dp = Dispatcher(bot)
 # === DUMMY HTTP FOR LEAPCELL ===
 import asyncio
 from aiohttp import web
+from aiogram import executor
 
 async def healthcheck(request):
     return web.Response(text="OK")
-
-async def start_dummy_server():
-    app = web.Application()
-    app.router.add_get('/kaithheathcheck', healthcheck)
-
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, host='0.0.0.0', port=8080)
-    await site.start()
-
-# Start the dummy server in the background
-asyncio.get_event_loop().create_task(start_dummy_server())
-
 
 # === HELPERS ===
 def load_json(path):
@@ -308,6 +296,18 @@ async def ping(message: types.Message):
 
 
 # === RUN ===
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+async def start_health_server():
+    app = web.Application()
+    app.router.add_get('/kaithheathcheck', healthcheck)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, host='0.0.0.0', port=8080)
+    await site.start()
 
+async def main():
+    await asyncio.gather(
+            start_health_server(),
+            dp.start_polling()
+        )
+if __name__ == '__main__':
+    asyncio.run(main())
