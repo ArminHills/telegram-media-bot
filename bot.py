@@ -7,6 +7,9 @@ from aiogram.utils import executor
 from dotenv import load_dotenv
 load_dotenv()
 
+import os
+print("Loaded BOT_TOKEN:", os.getenv("BOT_TOKEN"))
+
 
 # === CONFIG ===
 import os
