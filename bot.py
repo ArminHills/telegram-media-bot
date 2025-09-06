@@ -281,7 +281,7 @@ async def admin_help(message: types.Message):
 from aiohttp import web
 from aiogram.dispatcher.webhook import SimpleRequestHandler, setup_application
 
-WEBHOOK_HOST = 'https://your-leapcell-domain.leapcell.dev'  # Replace with your actual Leapcell domain
+WEBHOOK_HOST = 'https://telegram-media-bot-arminhills7901-wu870hyh.leapcell.dev'  # Replace with your actual Leapcell domain
 WEBHOOK_PATH = f'/webhook/{API_TOKEN}'
 WEBHOOK_URL = f'{WEBHOOK_HOST}{WEBHOOK_PATH}'
 
