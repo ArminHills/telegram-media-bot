@@ -199,6 +199,7 @@ async def remove_channel(message: types.Message):
 # === USER: START / DEEP LINK ===
 @dp.message_handler(commands=['start'])
 async def start_handler(message: types.Message):
+    logging.info(f"Received /start from {message.from_user.id}")
     args = message.get_args()
     if not args:
         await message.reply("👋 Welcome! Visit our main channel @YourMainChannel")
@@ -297,6 +298,14 @@ async def admin_help(message: types.Message):
     )
 
     await message.reply(text, parse_mode="Markdown")
+
+import logging
+logging.basicConfig(level=logging.INFO)
+
+@dp.message_handler(commands=['ping'])
+async def ping(message: types.Message):
+    await message.reply("🏓 Pong!")
+
 
 # === RUN ===
 if __name__ == '__main__':
