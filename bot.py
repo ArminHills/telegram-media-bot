@@ -278,32 +278,7 @@ async def admin_help(message: types.Message):
 
     await message.reply(text, parse_mode="Markdown")
 
-from aiohttp import web
-from aiogram.dispatcher.webhook import SimpleRequestHandler, setup_application
-
-WEBHOOK_HOST = 'https://telegram-media-bot-arminhills7901-wu870hyh.leapcell.dev'  # Replace with your actual Leapcell domain
-WEBHOOK_PATH = f'/webhook/{API_TOKEN}'
-WEBHOOK_URL = f'{WEBHOOK_HOST}{WEBHOOK_PATH}'
-
-async def on_startup(app):
-    await bot.set_webhook(WEBHOOK_URL)
-
-async def on_shutdown(app):
-    await bot.delete_webhook()
-
-app = web.Application()
-app.on_startup.append(on_startup)
-app.on_shutdown.append(on_shutdown)
-
-SimpleRequestHandler(dispatcher=dp, bot=bot).register(app, path=WEBHOOK_PATH)
-setup_application(app, dp, bot=bot)
-
-if __name__ == '__main__':
-    web.run_app(app, host='0.0.0.0', port=8080)
-
-
-
 # === RUN ===
-#if __name__ == '__main__':
-#    executor.start_polling(dp, skip_updates=True)
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
 
