@@ -24,6 +24,22 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
+# === DUMMY HTTP FOR LEAPCELL ===
+from aiohttp import web
+import threading
+
+async def healthcheck(request):
+    return web.Response(text="OK")
+
+def start_dummy_server():
+    app = web.Application()
+    app.router.add_get('/kaithheathcheck', healthcheck)
+    web.run_app(app, host='0.0.0.0', port=8080)
+
+# Start the dummy server in a separate thread
+threading.Thread(target=start_dummy_server, daemon=True).start()
+
+
 # === HELPERS ===
 def load_json(path):
     try:
