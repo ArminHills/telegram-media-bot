@@ -196,7 +196,7 @@ async def start_handler(message: types.Message):
     logging.info(f"Received /start from {message.from_user.id}")
     args = message.get_args()
     if not args:
-        await message.reply("👋 Welcome! Visit our main channel @YourMainChannel")
+        await message.reply("👄 بیا اینجا 👙 @femiboi_fuutta")
         return
 
     enforced_channels = await get_enforced_channels()
@@ -214,7 +214,7 @@ async def start_handler(message: types.Message):
         buttons = [types.InlineKeyboardButton(text=ch, url=f"https://t.me/{ch.lstrip('@')}") for ch in not_joined]
         buttons.append(types.InlineKeyboardButton(text="✅ I've Joined", callback_data=f"check:{args}"))
         markup = types.InlineKeyboardMarkup(row_width=1).add(*buttons)
-        await message.reply("🚫 Please join the following channels to access this content:", reply_markup=markup)
+        await message.reply("🚫 اول تو اینو جوین بده:", reply_markup=markup)
         return
 
     await send_media(message.chat.id, args)
@@ -237,10 +237,10 @@ async def check_membership(callback: types.CallbackQuery):
             not_joined.append(channel)
 
     if not_joined:
-        await callback.answer("🚫 You're still missing some channels!", show_alert=True)
+        await callback.answer("🚫 هنو همشو جوین ندادی!", show_alert=True)
         return
 
-    await callback.answer("✅ Verified! Sending media...")
+    await callback.answer("✅ الان میاد 💦")
     await increment_channel_joins(user_id)
     await callback.message.delete()
     await send_media(callback.message.chat.id, media_id)
@@ -264,14 +264,14 @@ async def send_media(chat_id, media_id):
 
     try:
         sent_messages = await bot.send_media_group(chat_id=chat_id, media=media_group)
-        warning = await bot.send_message(chat_id, "⚠️ This media will be deleted in 15 seconds. Save it if needed.")
+        warning = await bot.send_message(chat_id, "⚠️ .بعد 15 دیقع باک میشن ها")
         await asyncio.sleep(15)
         for msg in sent_messages:
             await bot.delete_message(chat_id=chat_id, message_id=msg.message_id)
         await bot.delete_message(chat_id=chat_id, message_id=warning.message_id)
 
     except Exception as e:
-        await bot.send_message(chat_id, f"⚠️ Failed to send media group: {e}")
+        await bot.send_message(chat_id, f"⚠️ عه نیومد: {e}")
 
 # === ADMIN: commands ===
 @dp.message_handler(commands=['adminhelp'])
