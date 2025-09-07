@@ -18,6 +18,7 @@ API_TOKEN = os.getenv("BOT_TOKEN")
 if not API_TOKEN:
     raise ValueError("BOT_TOKEN is not set in environment variables")
 ADMIN_IDS = list(map(int, os.getenv("ADMIN_IDS", "").split(",")))
+WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 AD_CHANNELS_FILE = 'ad_channels.json'
 MEDIA_INDEX_FILE = 'media_index.json'
 CHANNEL_JOINS_FILE = 'channel_joins.json'
