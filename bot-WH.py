@@ -27,6 +27,7 @@ CHANNEL_JOINS_FILE = 'channel_joins.json'
 # === INIT ===
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
+Bot.set_current(bot)
 dp = Dispatcher(bot)
 
 # === DUMMY HTTP FOR LEAPCELL ===
