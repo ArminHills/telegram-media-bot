@@ -5,6 +5,7 @@ import secrets
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
 from dotenv import load_dotenv
+from aiogram.types import Update
 load_dotenv()
 
 import os
